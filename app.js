@@ -7,6 +7,8 @@ var passport = require('passport');
 var session = require('express-session');
 var passportLocalSession = require('./utils/passportLocalStrategy');
 
+const tainter = require("./utils/tainter");
+
 var indexRouter = require('./routes/users/index');
 
 var app = express();
@@ -38,6 +40,8 @@ app.use(function (req, res, next) {
   res.header('Pragma', 'no-cache');
   next();
 });
+
+app.use(tainter); // add taint to post body
 
 app.use('/', indexRouter);
 

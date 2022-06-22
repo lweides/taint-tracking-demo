@@ -11,6 +11,9 @@ var pool = mysql.createPool({
 
 function executeQueryWithParam(query, parameters, callback) {
     return new Promise((resolve, reject) => {
+        if (Taint.isTainted(query)) {
+            console.warn("Executing SQL statement with tainted query");
+        }
         pool.query(query, parameters, (err, res) => {
             if (err) {
                 return reject(err);
@@ -23,6 +26,9 @@ function executeQueryWithParam(query, parameters, callback) {
 
 function executeQuery(query) {
     return new Promise((resolve, reject) => {
+        if (Taint.isTainted(query)) {
+            console.warn("Executing SQL statement with tainted query");
+        }
         pool.query(query, (err, res) => {
             if (err) {
                 return reject(err);

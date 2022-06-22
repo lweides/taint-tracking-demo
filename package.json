@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "DATABASE_HOST=localhost DATABASE_NAME=vuln_node_app_db DATABASE_USER=vulnnodeapp DATABASE_PASS=password node ./bin/www",
+    "setup-db": "docker run -p 3306:3306 --name db -e MYSQL_ROOT_PASSWORD=root -d mysql:5.7",
+    "populate-db": "docker cp populate_db.sql db:. && docker exec db sh -c \"mysql --user=root --password=root < populate_db.sql\""
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
