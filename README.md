@@ -39,6 +39,14 @@ insert into users(fullname,username,password,email,phone) values("test5","test5"
     * DATABASE_USER (E.g: vulnnodeapp or user name you change in above DB script)
     * DATABASE_PASS (E.g: password or password you change in above DB script)
 
+## Setup for the taint tracking demo
+- `cd` into the `graal-nodejs` directory
+- execute `mx npm run setup-db --prefix path/to/this/directory`
+- execute `mx npm run populate-db --prefix path/to/this/directory`
+- execute `mx npm run start`
+
+Nothing additional has to be done
+
 # Start the server
 - Open the command prompt/terminal and navigate to the location of your repository
 - Run command: `npm start`
