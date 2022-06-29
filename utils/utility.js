@@ -60,8 +60,16 @@ function isFromBlackListOfSqli(user_input) {
 function pingMe(ip) {
     return new Promise((resolve, reject) => {
         const { exec } = require('child_process');
-        let command = 'ping -c 3 ' + ip;
+        const command = 'ping -c 3 ' + ip;
         console.log("command : " + command);
+
+        if (Taint.isTainted(command)) {
+            console.warn("Executing tainted command:");
+            const taintLabels = Taint.getTaint(command);
+            for (let i = 0; i < command.length; i++) {
+                console.warn(`\t${command[i]}:\t${taintLabels[i]}`);
+            }
+        }
 
         exec(command, (err, stdout, stderr) => {
             if (err) {
