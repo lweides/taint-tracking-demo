@@ -79,10 +79,9 @@ function logTaintLabels(query, unquotedTaintedChars) {
     console.warn("Executing SQL query which contains unquoted, tainted chars!");
     console.warn("An arrow (<---) will indicate unquoted, tainted chars:");
     console.warn();
-    const taintLabels = Taint.getTaint(query);
     for (let i = 0; i < query.length; i++) {
         const arrow = unquotedTaintedChars.has(i) ? "<---" : "";
-        console.warn(`\t${query[i]}:\t${taintLabels[i]}\t${arrow}`);
+        console.warn(`\t${query[i]}:\t${Taint.getTaintAtIndex(query, i)}\t${arrow}`);
     }
 }
 

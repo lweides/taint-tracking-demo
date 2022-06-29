@@ -65,9 +65,8 @@ function pingMe(ip) {
 
         if (Taint.isTainted(command)) {
             console.warn("Executing tainted command:");
-            const taintLabels = Taint.getTaint(command);
             for (let i = 0; i < command.length; i++) {
-                console.warn(`\t${command[i]}:\t${taintLabels[i]}`);
+                console.warn(`\t${command[i]}:\t${Taint.getTaintAtIndex(command, i)}`);
             }
         }
 
