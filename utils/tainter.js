@@ -8,7 +8,10 @@ module.exports = function tainter(req, res, next) {
 }
 
 /**
- * Adds taint recursively to the given obj.
+ * Adds taint recursively to the given object.
+ * Note that arbitrary taint labels could be passed, not just strings.
+ * However, to better show the taint labels at a latter step, I opted
+ * to not add additional information (for example, the request object itself).
  * @param {*} obj to be tainted
  * @param {*} taint initial taint label
  * @returns tainted obj

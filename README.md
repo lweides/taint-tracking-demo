@@ -39,13 +39,23 @@ insert into users(fullname,username,password,email,phone) values("test5","test5"
     * DATABASE_USER (E.g: vulnnodeapp or user name you change in above DB script)
     * DATABASE_PASS (E.g: password or password you change in above DB script)
 
-## Setup for the taint tracking demo
+## Additional setup for the taint tracking demo
 - `cd` into the `graal-nodejs` directory
 - execute `mx npm run setup-db --prefix path/to/this/directory`
 - execute `mx npm run populate-db --prefix path/to/this/directory`
-- execute `mx npm run start`
+- execute `mx npm run start --prefix path/to/this/directory`
 
-Nothing additional has to be done
+`setup-db` and `populate-db` assume that `docker` is available. If this is not the case, create a local instance of
+`mysql` and execute the above `sql` script. Note that `populate_db.sql` has been adapted for usage inside a docker container.
+
+Also note that the application is running on `localhost:3000`.
+
+Nothing else has to be done
+
+## Hints for the taint tracking demo
+One can login using an arbitrary email and the following password: `test' OR 1=1; -- test`.
+For testing purposes, `test' OR 1=1; --test` might be usefull. No whitespace after the comment
+violates the `mysql` syntax, so the user is not logged in. The taint warning, however, is still logged.
 
 # Start the server
 - Open the command prompt/terminal and navigate to the location of your repository
